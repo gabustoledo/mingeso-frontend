@@ -12,6 +12,7 @@ import DiplomadoCienciaDatos from './components/DiplomadoCienciaDatos.js'
 import DiplomadoControl from './components/DiplomadoControl.js'
 import DiplomadoPeritaje from './components/DiplomadoPeritaje.js'
 import DiplomadoRiesgo from './components/DiplomadoRiesgo.js'
+import Postulaciones from './components/Postulaciones'
 import Correo from './components/Correo.js'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/DiplomadoControl" component={DiplomadoControl} />
                 <Route path="/DiplomadoPeritaje" component={DiplomadoPeritaje} />
                 <Route path="/DiplomadoRiesgo" component={DiplomadoRiesgo} />
+                <Route path="/Postulaciones" component={Postulaciones} />
                 <Route path="/Correo" component={Correo} />
             </div>
             <br></br><br></br>
