@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {background-color: rgb(93, 117, 255);}
+
+.jumbotron {
+    background-image: url("https://cdn-systematic.nozebrahosting.dk/media/phal5qj2/library-floors-with-books-from-floor-to-ceiling.jpeg?cropAlias=hero_small&width=992&height=250&quality=80&mode=crop&null");
+    background-size: cover;
+  }

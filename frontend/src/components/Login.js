@@ -74,7 +74,8 @@ class Inicio extends Component {
   render() {
     return (
       <div>
-        <title> Inicio de Sesión </title>
+        
+        <h1> Inicio de Sesión </h1>
 
         <Form onSubmit={this.log}>
           <Form.Group controlId="formBasicEmail">

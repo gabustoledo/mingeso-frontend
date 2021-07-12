@@ -10,22 +10,11 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
-//FALTA TERMINAR: función delete.
-//const borrarPostulacion = (id_postulante) => {
-//  axios
-//      .delete("/FormularioDelete/{id_postulante}")
-//      .catch((err) => console.log(err));
-//}
-
 class Postulaciones extends Component {
   constructor() {
     super();
-    this.state = { postulaciones: [], diplomados: [], show: false };
+    this.state = { postulaciones: [], diplomados: [], show: false, showAceptar:false };
   }
-
-  //componentDidMount() { //<----------------------------
-  //  this.state.getPostulaciones();
-  //}
 
   getPostulaciones = (e) => {
     e.preventDefault();
@@ -33,8 +22,6 @@ class Postulaciones extends Component {
       .get("http://localhost:1818/Formulario")
       .then((response) => {
         this.setState({ postulaciones: response.data });
-        console.log(this.state.postulaciones);
-        //vemos que postulaciones son las correctas status 1
       })
       .catch((err) => console.log(err));
   };
@@ -45,15 +32,35 @@ class Postulaciones extends Component {
       .get("http://localhost:1818/Diplomado")
       .then((response) => {
         this.setState({ diplomados: response.data });
-        console.log(this.state.diplomados);
-        //vemos que postulaciones son las correctas status 1
       })
       .catch((err) => console.log(err));
   };
 
   clickBoton = (e) => {
+    e.preventDefault();
     this.getPostulaciones(e);
     this.getDiplomados(e);
+  };
+
+  borrarPostulacion = (e, id_postulacion) => {
+    this.handleShow(e);
+    e.preventDefault();
+    axios
+      .delete("http://localhost:1818/FormularioDelete/" + id_postulacion)
+      .then((response) => {
+      })
+      .catch((err) => console.log(err));
+  };
+
+  aceptarPostulacion = (e, postulacion) => {
+    this.handleShowAceptar(e);
+    e.preventDefault();
+    postulacion.status = 2
+    axios
+      .put("http://localhost:1818/FormularioUpdate", postulacion)
+      .then((response) => {
+      })
+      .catch((err) => console.log(err));
   };
 
   handleShow = (e) => {
@@ -68,20 +75,29 @@ class Postulaciones extends Component {
     });
   };
 
+  handleShowAceptar = (e) => {
+    this.setState({
+      showAceptar: true,
+    });
+  };
+
+  handleCloseAceptar = (e) => {
+    this.setState({
+      showAceptar: false,
+    });
+  };
+
   render() {
     return (
       <div>
         <br />
-
         <Container fluid>
           <h1> Postulaciones </h1>
-
           <Button variant="primary" type="submit" onClick={this.clickBoton}>
             {" "}
-            Ver{" "}
+            Ver Postulaciones{" "}
           </Button>
         </Container>
-
         <br />
         <br />
 
@@ -89,29 +105,31 @@ class Postulaciones extends Component {
           <ul>
             {this.state.postulaciones.map((postulacion) => (
               <div>
-                {postulacion.status == 1 && (
+                {postulacion.status === 1 && (
                   <div>
                     <Card>
                       <Card.Header>Postulación {postulacion.id}</Card.Header>
-                      <Card.Body>
-                        <Card.Title>
-                          <p> Postulante: {postulacion.nombre} </p>
-                          <p> Mail: {postulacion.correo} </p>
-                        </Card.Title>
-                        <Card.Text>
-                          {this.state.diplomados.map((diplomado) => (
-                            <div>
-                              {diplomado.id === postulacion.idDiplomado && (
-                                <p>
-                                  {" "}
-                                  Este postulante está interesado en{" "}
-                                  {diplomado.nombre}{" "}
-                                </p>
-                              )}
-                            </div>
-                          ))}{" "}
-                        </Card.Text>
-                      </Card.Body>
+                      <div>
+                        <Card.Body>
+                          <Card.Title>
+                            <p> Postulante: {postulacion.nombre} </p>
+                            <p> Mail: {postulacion.correo} </p>
+                          </Card.Title>
+                          <Card.Text>
+                            {this.state.diplomados.map((diplomado) => (
+                              <div>
+                                {diplomado.id === postulacion.idDiplomado && (
+                                  <p>
+                                    {" "}
+                                    Este postulante está interesado en{" "}
+                                    {diplomado.nombre}{" "}
+                                  </p>
+                                )}
+                              </div>
+                            ))}{" "}
+                          </Card.Text>
+                        </Card.Body>
+                      </div>
                     </Card>
                     <Accordion>
                       <Card>
@@ -121,29 +139,60 @@ class Postulaciones extends Component {
                             variant="link"
                             eventKey="0"
                           >
-                            Ver archivos adjuntos
+                            Ver archivos adjuntos:
                           </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                           <div>
-                          <Card.Body>
-                            <Card.Title>Archivos del postulante</Card.Title>
-                          </Card.Body>
-                          <Card.Footer className="text-muted">
-                            <Row>
-                              <Col sm={3}>
-                                <Button variant="primary">
-                                  Ver en mas detalles
+                            <Card.Body>
+                              <Card.Title>Archivos del postulante</Card.Title>
+
+                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Titulo_Profesional.pdf`}>
+                                  Titulo_Profesional.pdf
                                 </Button>
-                              </Col>
-                              <Col sm={8}></Col>
-                              <Col sm={1}>
-                                <Button variant="danger" onClick={this.handleShow}>
-                                  Borrar
+
+                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Certificado_Nacimiento.pdf`}>
+                                  Certificado_Nacimiento.pdf
                                 </Button>
-                              </Col>
-                            </Row>
-                          </Card.Footer>
+                                
+                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Copia_cedula_Identidad.pdf`}>
+                                  Copia_cedula_Identidad.pdf
+                                </Button>
+
+                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Curriculum_Vitae.pdf`}>
+                                  Curriculum_Vitae.pdf
+                                </Button>
+
+                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Ficha_de_inscripcion.pdf`}>
+                                  Ficha_de_inscripcion.pdf
+                                </Button>
+                                  
+                            </Card.Body>
+                            <Card.Footer className="text-muted">
+                              <Row>
+                                <Col sm={3}>
+                                  <Button
+                                    variant="primary"
+                                    onClick={(e) =>
+                                      this.aceptarPostulacion(e, postulacion)
+                                    }
+                                  >
+                                    Aceptar
+                                  </Button>
+                                </Col>
+                                <Col sm={7}></Col>
+                                <Col sm={1}>
+                                  <Button
+                                    variant="danger"
+                                    onClick={(e) =>
+                                      this.borrarPostulacion(e, postulacion.id)
+                                    }
+                                  >
+                                    Rechazar
+                                  </Button>
+                                </Col>
+                              </Row>
+                            </Card.Footer>
                           </div>
                         </Accordion.Collapse>
                       </Card>
@@ -170,6 +219,24 @@ class Postulaciones extends Component {
             <Button variant="danger" size="sm" block onClick={this.handleClose}>
               {" "}
               Borrar Postulación{" "}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal
+          show={this.state.showAceptar}
+          onHide={this.handleCloseAceptar}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Postulante aceptado</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>La postulacion del estudiante pasara al comite para ser revisada.</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" size="sm" block onClick={this.handleCloseAceptar}>
+              {" "}
+              Aceptar{" "}
             </Button>
           </Modal.Footer>
         </Modal>
