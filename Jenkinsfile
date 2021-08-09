@@ -1,9 +1,6 @@
 pipeline {
     agent any
-
-    tools{
-        gradle 'gradle-6.8.3'
-    }
+    
     environment{
         DOCKERHUB_CREDENTIALS = credentials('gabustoledo-dockerhub')
     }
@@ -28,6 +25,11 @@ pipeline {
                     sh 'docker push gabustoledo/repo-front'
                 }
             }
+        }
+    }
+    post{
+        always{
+            sh 'docker logout'
         }
     }
 }
