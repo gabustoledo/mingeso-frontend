@@ -95,17 +95,17 @@ class Inicio extends Component {
               onChange={this.setPass}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" name="btnLogin">
             Login
           </Button>
         </Form>
 
         <Modal show={this.state.showLogValido} onHide={this.handleCloseValido}>
           <Modal.Header closeButton>
-            <Modal.Title>Bienvenido {this.state.nombre}!!</Modal.Title>
+            <Modal.Title name="msgBienvenida">Bienvenido {this.state.nombre}!!</Modal.Title>
           </Modal.Header>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleCloseValido}>
+            <Button variant="secondary" onClick={this.handleCloseValido} name="cerrar">
               Cerrar
             </Button>
           </Modal.Footer>
@@ -121,7 +121,7 @@ class Inicio extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleCloseInvalido}>
+            <Button variant="secondary" onClick={this.handleCloseInvalido} name="cerrar">
               Cerrar
             </Button>
           </Modal.Footer>

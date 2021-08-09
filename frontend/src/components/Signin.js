@@ -27,6 +27,7 @@ class Inicio extends Component {
       control: false,
       peritaje: false,
       id: "",
+      showLogValido: false,
     };
   }
 
@@ -94,6 +95,9 @@ class Inicio extends Component {
       })
       .then((response) => {
         this.setState({ id: response.data.id });
+        this.setState({
+          showLogValido: true,
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -118,6 +122,11 @@ class Inicio extends Component {
     if (this.state.peritaje) {
       postAcademicoDiplomado(this.state.id, 5);
     }
+  };
+  handleCloseValido = (e) => {
+    this.setState({
+      showLogValido: false,
+    });
   };
 
   setCiencia = (e) => {
@@ -163,6 +172,7 @@ class Inicio extends Component {
               type="text"
               placeholder="Nombre y Apellido"
               onChange={this.setNombre}
+              name="nombre"
             />
           </Form.Group>
 
@@ -172,6 +182,7 @@ class Inicio extends Component {
               type="text"
               placeholder="Rut"
               onChange={this.setRut}
+              name="rut"
             />
           </Form.Group>
 
@@ -181,6 +192,7 @@ class Inicio extends Component {
               type="email"
               placeholder="Email"
               onChange={this.setEmail}
+              name="email"
             />
           </Form.Group>
 
@@ -190,6 +202,7 @@ class Inicio extends Component {
               type="password"
               placeholder="Contraseña"
               onChange={this.setPass}
+              name="pass"
             />
           </Form.Group>
 
@@ -224,10 +237,22 @@ class Inicio extends Component {
             ))}
           </Form>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" name="btnRegister">
             Registrarse
           </Button>
         </Form>
+
+        <Modal show={this.state.showLogValido} onHide={this.handleCloseValido}>
+          <Modal.Header closeButton>
+            <Modal.Title name="msgBienvenida">Te acabas de registrar {this.state.nombre}!!</Modal.Title>
+            <Modal.Body name="msgId" hidden>{this.state.id}</Modal.Body>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleCloseValido}>
+              Cerrar
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>

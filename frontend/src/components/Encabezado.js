@@ -11,8 +11,8 @@ class Encabezado extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/registrar">Registro Academicos</Nav.Link>
-              <Nav.Link href="/login">Login</Nav.Link>
+              <Nav.Link href="/registrar" name="btnRegisterEncabezado">Registro Academicos</Nav.Link>
+              <Nav.Link href="/login" name="btnLoginEncabezado">Login</Nav.Link>
               <Nav.Link href="/diplomados">Diplomados</Nav.Link>
             </Nav>
           </Navbar.Collapse>
