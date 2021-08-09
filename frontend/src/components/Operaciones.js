@@ -46,7 +46,7 @@ class Operaciones extends Component {
     handleSumbitSuma = e =>{
         e.preventDefault();
         axios
-            .post("http://localhost:1818/operaciones/suma", {primerNumero: this.state.primerNumeroSuma,segundoNumero: this.state.segundoNumeroSuma})
+            .post("http://104.131.39.116:1818/operaciones/suma", {primerNumero: this.state.primerNumeroSuma,segundoNumero: this.state.segundoNumeroSuma})
             .then((response) => {
                 this.setState({resultadoSuma: response.data.resultado})
             })
@@ -56,7 +56,7 @@ class Operaciones extends Component {
     handleSumbitResta = e =>{
         e.preventDefault();
         axios
-            .post("http://localhost:1818/operaciones/resta", {primerNumero: this.state.primerNumeroResta,segundoNumero: this.state.segundoNumeroResta})
+            .post("http://104.131.39.116:1818/operaciones/resta", {primerNumero: this.state.primerNumeroResta,segundoNumero: this.state.segundoNumeroResta})
             .then((response) => {
                 this.setState({resultadoResta: response.data.resultado})
             })

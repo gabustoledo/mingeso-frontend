@@ -19,7 +19,7 @@ class Postulaciones extends Component {
   getPostulaciones = (e) => {
     e.preventDefault();
     axios
-      .get("http://localhost:1818/Formulario")
+      .get("http://104.131.39.116:1818/Formulario")
       .then((response) => {
         this.setState({ postulaciones: response.data });
       })
@@ -29,7 +29,7 @@ class Postulaciones extends Component {
   getDiplomados = (e) => {
     e.preventDefault();
     axios
-      .get("http://localhost:1818/Diplomado")
+      .get("http://104.131.39.116:1818/Diplomado")
       .then((response) => {
         this.setState({ diplomados: response.data });
       })
@@ -46,7 +46,7 @@ class Postulaciones extends Component {
     this.handleShow(e);
     e.preventDefault();
     axios
-      .delete("http://localhost:1818/FormularioDelete/" + id_postulacion)
+      .delete("http://104.131.39.116:1818/FormularioDelete/" + id_postulacion)
       .then((response) => {
       })
       .catch((err) => console.log(err));
@@ -57,7 +57,7 @@ class Postulaciones extends Component {
     e.preventDefault();
     postulacion.status = 2
     axios
-      .put("http://localhost:1818/FormularioUpdate", postulacion)
+      .put("http://104.131.39.116:1818/FormularioUpdate", postulacion)
       .then((response) => {
       })
       .catch((err) => console.log(err));
@@ -147,23 +147,23 @@ class Postulaciones extends Component {
                             <Card.Body>
                               <Card.Title>Archivos del postulante</Card.Title>
 
-                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Titulo_Profesional.pdf`}>
+                                <Button variant="link" href={`http://104.131.39.116:1818/files/${postulacion.id}/Titulo_Profesional.pdf`}>
                                   Titulo_Profesional.pdf
                                 </Button>
 
-                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Certificado_Nacimiento.pdf`}>
+                                <Button variant="link" href={`http://104.131.39.116:1818/files/${postulacion.id}/Certificado_Nacimiento.pdf`}>
                                   Certificado_Nacimiento.pdf
                                 </Button>
                                 
-                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Copia_cedula_Identidad.pdf`}>
+                                <Button variant="link" href={`http://104.131.39.116:1818/files/${postulacion.id}/Copia_cedula_Identidad.pdf`}>
                                   Copia_cedula_Identidad.pdf
                                 </Button>
 
-                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Curriculum_Vitae.pdf`}>
+                                <Button variant="link" href={`http://104.131.39.116:1818/files/${postulacion.id}/Curriculum_Vitae.pdf`}>
                                   Curriculum_Vitae.pdf
                                 </Button>
 
-                                <Button variant="link" href={`http://localhost:1818/files/${postulacion.id}/Ficha_de_inscripcion.pdf`}>
+                                <Button variant="link" href={`http://104.131.39.116:1818/files/${postulacion.id}/Ficha_de_inscripcion.pdf`}>
                                   Ficha_de_inscripcion.pdf
                                 </Button>
                                   

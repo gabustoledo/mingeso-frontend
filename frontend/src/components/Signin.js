@@ -4,7 +4,7 @@ import axios from "axios";
 
 const postAcademicoDiplomado = (idAcademico, idDiplomado) => {
   axios
-    .post("http://localhost:1818/AdministrativoDiplomado", {
+    .post("http://104.131.39.116:1818/AdministrativoDiplomado", {
       idAdministrativo: idAcademico,
       idDiplomado: idDiplomado,
     })
@@ -84,7 +84,7 @@ class Inicio extends Component {
       });
     }
     axios
-      .post("http://localhost:1818/Administrativo", {
+      .post("http://104.131.39.116:1818/Administrativo", {
         nombre: this.state.nombre,
         rut: this.state.rut,
         correo: this.state.email,

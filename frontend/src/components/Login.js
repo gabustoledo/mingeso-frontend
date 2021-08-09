@@ -35,7 +35,7 @@ class Inicio extends Component {
   log = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:1818/AdministrativoLogin", {
+      .post("http://104.131.39.116:1818/AdministrativoLogin", {
         correo: this.state.email,
         contrasena: this.state.pass,
       })

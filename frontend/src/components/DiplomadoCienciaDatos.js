@@ -274,7 +274,7 @@ class Inicio extends Component {
               <li>Currículum Vitae.</li>
               <li>Ficha de inscripción.</li>
             </ul>
-            <Button href="http://localhost:1818/postulacion">
+            <Button href="http://104.131.39.116:1818/postulacion">
               Envio de documentos
             </Button>
           </Tab>
